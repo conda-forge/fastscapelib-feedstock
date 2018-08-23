@@ -19,8 +19,6 @@ outputs:
   - name: fastscapelib
     script: install_cpp_headers.sh   # [unix]
     script: install_cpp_headers.bat  # [win]
-    build:
-      activate_in_script: True
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -40,8 +38,6 @@ outputs:
   - name: fastscapelib-python
     script: install_python.sh   # [unix]
     script: install_python.bat  # [win]
-    build:
-      activate_in_script: True
     requirements:
       build:
         - {{ compiler('c') }}
