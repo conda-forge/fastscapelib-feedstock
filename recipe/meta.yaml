@@ -11,14 +11,13 @@ source:
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
-build:
-  number: 1
-  skip: True  # [win and vc<14]
-
 outputs:
   - name: fastscapelib
     script: install_cpp_headers.sh   # [unix]
     script: install_cpp_headers.bat  # [win]
+    build:
+      number: 1
+      activate_in_script: True
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -38,6 +37,10 @@ outputs:
   - name: fastscapelib-python
     script: install_python.sh   # [unix]
     script: install_python.bat  # [win]
+    build:
+      number: 1
+      activate_in_script: True
+      skip: True  # [win and vc<14]
     requirements:
       build:
         - {{ compiler('c') }}
