@@ -20,6 +20,7 @@ outputs:
     script: install_cpp_headers.sh   # [unix]
     script: install_cpp_headers.bat  # [win]
     build:
+      number: 1
       activate_in_script: True
     requirements:
       build:
@@ -41,6 +42,7 @@ outputs:
     script: install_python.sh   # [unix]
     script: install_python.bat  # [win]
     build:
+      number: 1
       activate_in_script: True
     requirements:
       build:
