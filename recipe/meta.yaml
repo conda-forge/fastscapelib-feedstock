@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1000
   skip: True  # [win and vc<14]
 
 outputs:
@@ -51,8 +51,8 @@ outputs:
         - python
         - setuptools
         - numpy
-        - xtensor >=0.18.2,<0.19
-        - xtensor-python >=0.21,<0.22
+        - xtensor >=0.18.2,<0.20
+        - xtensor-python >=0.21,<0.23
       run:
         - python
         - {{ pin_compatible('numpy') }}
