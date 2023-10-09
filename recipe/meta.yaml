@@ -71,7 +71,7 @@ outputs:
 about:
   home: https://github.com/fastscape-lem/fastscapelib
   doc_url: https://fastscapelib.readthedocs.io
-  license: GPLv3
+  license: GPL-3.0-or-later
   license_file: LICENSE
   summary: 'A C++/Python library of efficient algorithms for landscape evolution modeling'
   description: |
