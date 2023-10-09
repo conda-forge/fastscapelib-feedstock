@@ -1,6 +1,6 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.1.3" %}
-{% set sha256 = "5872275778af0e02490b33f4bec9d9fe3edbc501d89845ce769ef85b3f463944" %}
+{% set version = "0.2.0" %}
+{% set sha256 = "4029657425908b3fc4ef41339bd9db564b0308a4874316c2fdb4c67696db26d9" %}
 
 package:
   name: {{ name|lower }}
@@ -12,15 +12,15 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1000
-  skip: True  # [win and vc<14]
+  number: 0
+  skip: true  # [win and vc<14]
 
 outputs:
   - name: fastscapelib
-    script: install_cpp_headers.sh   # [unix]
+    script: install_cpp_headers.sh  # [unix]
     script: install_cpp_headers.bat  # [win]
     build:
-      activate_in_script: True
+      activate_in_script: true
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -38,10 +38,10 @@ outputs:
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfig.cmake (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfigVersion.cmake (exit 0) else (exit 1)  # [win]
   - name: fastscapelib-python
-    script: install_python.sh   # [unix]
+    script: install_python.sh  # [unix]
     script: install_python.bat  # [win]
     build:
-      activate_in_script: True
+      activate_in_script: true
     requirements:
       build:
         - {{ compiler('c') }}
