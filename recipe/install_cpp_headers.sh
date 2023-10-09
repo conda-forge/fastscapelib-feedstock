@@ -10,7 +10,9 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
         -DFS_DOWNLOAD_GTEST=ON
 
   cmake --build build/tests -- -j${CPU_COUNT}
-  ctest -T test --output-on-failure build/tests
+  cd build/tests
+  ctest -T test --output-on-failure
+  cd ../..
 fi
 
 # install
