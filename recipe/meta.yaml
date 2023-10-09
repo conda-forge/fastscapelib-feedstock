@@ -1,6 +1,5 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.1.3" %}
-{% set sha256 = "5872275778af0e02490b33f4bec9d9fe3edbc501d89845ce769ef85b3f463944" %}
+{% set version = "0.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -9,11 +8,11 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 4029657425908b3fc4ef41339bd9db564b0308a4874316c2fdb4c67696db26d9
 
 build:
-  number: 1000
-  skip: True  # [win and vc<14]
+  number: 0
+  skip: True  # [python_impl == 'pypy']
 
 outputs:
   - name: fastscapelib
@@ -25,51 +24,61 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - cmake
+        - make  # [linux]
       host:
-        - xtensor >=0.18.2,<0.19
+        - xtensor >=0.24,<0.25
       run:
-        - xtensor >=0.18.2,<0.19
+        - xtensor >=0.24,<0.25
     test:
       commands:
-        - test -f ${PREFIX}/include/fastscapelib/fastscapelib.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/flow_graph.hpp  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfig.cmake  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfigVersion.cmake  # [unix]
-        - if exist %LIBRARY_PREFIX%\include\fastscapelib\fastscapelib.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\flow_graph.hpp (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfig.cmake (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfigVersion.cmake (exit 0) else (exit 1)  # [win]
   - name: fastscapelib-python
-    script: install_python.sh   # [unix]
-    script: install_python.bat  # [win]
+    script: {{ PYTHON }} -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
     build:
       activate_in_script: True
     requirements:
       build:
-        - {{ compiler('c') }}
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
+        - scikit-build-core
         - {{ compiler('cxx') }}
         - cmake
       host:
         - python
-        - setuptools
+        - pip
         - numpy
-        - xtensor >=0.18.2,<0.20
-        - xtensor-python >=0.21,<0.23
+        - xtensor >=0.24.7,<0.30
+        - xtensor-python >=0.26.1,<0.27
       run:
         - python
         - {{ pin_compatible('numpy') }}
     test:
+      source_files:
+        - python/fastscapelib/tests
+      requires:
+        - pytest
       imports:
         - fastscapelib
+      commands:
+        - pytest
 
 about:
   home: https://github.com/fastscape-lem/fastscapelib
   doc_url: https://fastscapelib.readthedocs.io
   license: GPLv3
   license_file: LICENSE
-  summary: 'Library for topographic analysis and modeling'
+  summary: 'A C++/Python library of efficient algorithms for landscape evolution modeling'
   description: |
-    Fastscapelib is a C++ library that implements efficient algorithms
-    for processing topographic data and landscape evolution
-    modeling. It also has Python bindings.
+    Fastscapelib is a C++/Python library of efficient and reusable algorithms for
+    landscape evolution modeling. It aims at providing a (bare bones) toolkit for
+    building your own Landscape Evolution Models (LEMs) or integrating it
+    with other existing codes or models.
 
 extra:
   recipe-maintainers:
