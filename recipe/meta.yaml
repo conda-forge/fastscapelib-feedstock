@@ -40,6 +40,10 @@ outputs:
   - name: fastscapelib-python
     build:
       script: python -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
+      script_env:
+        # C++17 features marked not available
+        # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
+        - CPPFLAGS=-D_LIBCPP_DISABLE_AVAILABILITY    # [osx]
       activate_in_script: True
     requirements:
       build:
