@@ -38,7 +38,7 @@ outputs:
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfig.cmake (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfigVersion.cmake (exit 0) else (exit 1)  # [win]
   - name: fastscapelib-python
-    script: {{ PYTHON }} -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
+    script: python -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
     build:
       activate_in_script: True
     requirements:
