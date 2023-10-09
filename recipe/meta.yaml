@@ -41,7 +41,7 @@ outputs:
     build:
       script: python -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
       script_env:
-        - SKBUILD_CMAKE_ARGS="-GNinja"
+        - CMAKE_GENERATOR="Ninja"
       activate_in_script: True
     requirements:
       build:
