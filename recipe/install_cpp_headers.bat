@@ -10,7 +10,7 @@ cmake -S . ^
       -DFS_DOWNLOAD_GTEST=ON
 if errorlevel 1 exit 1
 
-cmake --build ^
+cmake --build build ^
       --config Release ^
       --target install ^
       -- -j %CPU_COUNT%
