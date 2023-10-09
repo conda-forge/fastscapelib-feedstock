@@ -41,7 +41,7 @@ outputs:
     build:
       script: python -m pip install . --no-deps -v --ignore-installed --no-cache-dir --no-build-isolation
       script_env:
-        - CMAKE_GENERATOR="Ninja"
+        - CMAKE_GENERATOR=Ninja
       activate_in_script: True
     requirements:
       build:
@@ -51,6 +51,7 @@ outputs:
         - {{ compiler('cxx') }}
         - cmake
         - ninja
+        - make  # [linux]
       host:
         - python
         - scikit-build-core >=0.5,<0.6
