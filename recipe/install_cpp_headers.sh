@@ -1,12 +1,23 @@
 #!/bin/bash
+set -e
 
-mkdir build_cpp
-cd build_cpp
+# run tests
+if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+  cmake -S . \
+        -B build/tests \
+        ${CMAKE_ARGS} \
+        -DFS_BUILD_TESTS=ON \
+        -DFS_DOWNLOAD_GTEST=ON
 
-cmake $SRC_DIR \
-      -DVERSION_TAG=$PKG_VERSION \
-      -DBUILD_TESTS=OFF \
+  cmake --build build/tests -- -j${CPU_COUNT}
+  ctest -T test --output-on-failure build/tests
+fi
+
+# install
+cmake -S . \
+      -B build \
+      ${CMAKE_ARGS} \
+      -DCMAKE_PREFIX_PATH=$PREFIX \
       -DCMAKE_INSTALL_PREFIX=$PREFIX \
-      -DCMAKE_INSTALL_LIBDIR=lib $SRC_DIR
 
-make install
+cmake --build build --target install

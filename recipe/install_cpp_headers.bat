@@ -1,12 +1,21 @@
-mkdir build_cpp
-cd build_cpp
 
-cmake %SRC_DIR% -G "%CMAKE_GENERATOR%" ^
-                -DVERSION_TAG="%PKG_VERSION%" ^
-                -DCMAKE_PREFIX_PATH="%PREFIX%" ^
-                -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
-                -DBUILD_TESTS=OFF
+cmake -S . ^
+      -B build ^
+      %CMAKE_ARGS% ^
+      -G"NMake Makefiles" ^
+      -DCMAKE_PREFIX_PATH="%PREFIX%" ^
+      -DCMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
+      -DCMAKE_BUILD_TYPE=Release ^
+      -DFS_BUILD_TESTS=ON ^
+      -DFS_DOWNLOAD_GTEST=ON
 if errorlevel 1 exit 1
 
-cmake --build . --target install
+cmake --build ^
+      --config Release ^
+      --target install ^
+      -- -j %CPU_COUNT%
+if errorlevel 1 exit 1
+
+cd build
+ctest --output-on-failure
 if errorlevel 1 exit 1
