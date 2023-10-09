@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/fastscapelib-fe
 
 Home: https://github.com/fastscape-lem/fastscapelib
 
-Package license: GPLv3
+Package license: GPL-3.0-or-later
 
 Summary: A C++/Python library of efficient algorithms for landscape evolution modeling
 
