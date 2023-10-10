@@ -1,6 +1,0 @@
-c_compiler:    # [unix]
-  - gcc        # [linux]
-  - clang      # [osx]
-cxx_compiler:  # [unix]
-  - gxx        # [linux]
-  - clangxx    # [osx]
