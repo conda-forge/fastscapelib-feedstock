@@ -11,7 +11,7 @@ source:
   sha256: 4029657425908b3fc4ef41339bd9db564b0308a4874316c2fdb4c67696db26d9
 
 build:
-  number: 0
+  number: 1
   skip: True  # [python_impl == 'pypy']
 
 outputs:
