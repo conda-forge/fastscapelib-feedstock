@@ -12,7 +12,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [python_impl == 'pypy']
 
 outputs:
   - name: fastscapelib
@@ -45,6 +44,7 @@ outputs:
         - export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"  # [osx]
         - python -m pip install . --no-deps -v --no-build-isolation
       activate_in_script: true
+      skip: true  # [python_impl == 'pypy']
     requirements:
       build:
         - python                                 # [build_platform != target_platform]
