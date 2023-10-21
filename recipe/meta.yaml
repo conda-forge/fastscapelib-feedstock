@@ -1,5 +1,5 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.2.0" %}
+{% set version = "0.2.1" %}
 
 package:
   name: {{ name|lower }}-split
@@ -8,18 +8,17 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
-  sha256: 4029657425908b3fc4ef41339bd9db564b0308a4874316c2fdb4c67696db26d9
+  sha256: 6cfc73ad6f0feae4eecdc49a40ee2e58182ac34e2ad0260a194c819ec400f4cf
 
 build:
-  number: 1
-  skip: True  # [python_impl == 'pypy']
+  number: 0
 
 outputs:
   - name: fastscapelib
-    script: install_cpp_headers.sh   # [unix]
+    script: install_cpp_headers.sh  # [unix]
     script: install_cpp_headers.bat  # [win]
     build:
-      activate_in_script: True
+      activate_in_script: true
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -44,7 +43,8 @@ outputs:
         # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
         - export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"  # [osx]
         - python -m pip install . --no-deps -v --no-build-isolation
-      activate_in_script: True
+      activate_in_script: true
+      skip: true  # [python_impl == 'pypy']
     requirements:
       build:
         - python                                 # [build_platform != target_platform]
