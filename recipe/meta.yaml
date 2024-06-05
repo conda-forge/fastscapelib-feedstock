@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
-  sha256: 6cfc73ad6f0feae4eecdc49a40ee2e58182ac34e2ad0260a194c819ec400f4cf
+  sha256: 21cac72a0586d1ceb1080eadbb60a7b7e81a4d6a7b56edbc696f92ff87fc6566
 
 build:
   number: 0
