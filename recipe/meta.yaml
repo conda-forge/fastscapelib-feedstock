@@ -1,5 +1,5 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.2.1" %}
+{% set version = "0.2.2" %}
 
 package:
   name: {{ name|lower }}-split
@@ -30,10 +30,14 @@ outputs:
         - xtensor >=0.24,<0.25
     test:
       commands:
-        - test -f ${PREFIX}/include/fastscapelib/flow_graph.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/grid/raster_grid.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/flow/flow_graph.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/version.hpp  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfig.cmake  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfigVersion.cmake  # [unix]
-        - if exist %LIBRARY_PREFIX%\include\fastscapelib\flow_graph.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\grid\raster_grid.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\flow\flow_graph.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\version.hpp (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfig.cmake (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfigVersion.cmake (exit 0) else (exit 1)  # [win]
   - name: fastscapelib-python
