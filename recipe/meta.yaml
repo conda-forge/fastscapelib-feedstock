@@ -22,7 +22,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
-        - {{ stdlib("c") }
+        - {{ stdlib("c") }}
         - cmake
         - make  # [linux]
       host:
@@ -56,7 +56,7 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - numpy                                  # [build_platform != target_platform]
         - {{ compiler('cxx') }}
-        - {{ stdlib("c") }
+        - {{ stdlib("c") }}
         - cmake
         - make  # [linux]
       host:
