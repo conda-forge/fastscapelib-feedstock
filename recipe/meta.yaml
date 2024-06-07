@@ -1,5 +1,5 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.2.1" %}
+{% set version = "0.2.2" %}
 
 package:
   name: {{ name|lower }}-split
@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
-  sha256: 6cfc73ad6f0feae4eecdc49a40ee2e58182ac34e2ad0260a194c819ec400f4cf
+  sha256: 21cac72a0586d1ceb1080eadbb60a7b7e81a4d6a7b56edbc696f92ff87fc6566
 
 build:
   number: 0
@@ -22,6 +22,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - cmake
         - make  # [linux]
       host:
@@ -30,10 +31,14 @@ outputs:
         - xtensor >=0.24,<0.25
     test:
       commands:
-        - test -f ${PREFIX}/include/fastscapelib/flow_graph.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/grid/raster_grid.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/flow/flow_graph.hpp  # [unix]
+        - test -f ${PREFIX}/include/fastscapelib/version.hpp  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfig.cmake  # [unix]
         - test -f ${PREFIX}/lib/cmake/fastscapelib/fastscapelibConfigVersion.cmake  # [unix]
-        - if exist %LIBRARY_PREFIX%\include\fastscapelib\flow_graph.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\grid\raster_grid.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\flow\flow_graph.hpp (exit 0) else (exit 1)  # [win]
+        - if exist %LIBRARY_PREFIX%\include\fastscapelib\version.hpp (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfig.cmake (exit 0) else (exit 1)  # [win]
         - if exist %LIBRARY_PREFIX%\lib\cmake\fastscapelibConfigVersion.cmake (exit 0) else (exit 1)  # [win]
   - name: fastscapelib-python
@@ -51,6 +56,7 @@ outputs:
         - cross-python_{{ target_platform }}     # [build_platform != target_platform]
         - numpy                                  # [build_platform != target_platform]
         - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
         - cmake
         - make  # [linux]
       host:
