@@ -11,7 +11,7 @@ source:
   sha256: 21cac72a0586d1ceb1080eadbb60a7b7e81a4d6a7b56edbc696f92ff87fc6566
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: fastscapelib
@@ -69,7 +69,6 @@ outputs:
         - xtensor-python >=0.26.1,<0.27
       run:
         - python
-        - {{ pin_compatible('numpy') }}
     test:
       source_files:
         - python/fastscapelib/tests
