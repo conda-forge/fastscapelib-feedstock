@@ -13,16 +13,11 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '16'
+- '18'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
-- '2.0'
-- '2.0'
-- '2.0'
-- '1.22'
-- '1.22'
-- '2.0'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -33,19 +28,16 @@ python:
 - 3.10.* *_cpython
 - 3.11.* *_cpython
 - 3.12.* *_cpython
-- 3.8.* *_cpython
-- 3.9.* *_73_pypy
+- 3.13.* *_cp313
 - 3.9.* *_cpython
 python_impl:
 - cpython
 - cpython
 - cpython
 - cpython
-- pypy
 - cpython
 target_platform:
 - osx-64
 zip_keys:
 - - python
-  - numpy
   - python_impl

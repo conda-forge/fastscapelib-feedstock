@@ -11,7 +11,7 @@ source:
   sha256: 21cac72a0586d1ceb1080eadbb60a7b7e81a4d6a7b56edbc696f92ff87fc6566
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - name: fastscapelib
@@ -24,7 +24,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - cmake
-        - make  # [linux]
+        - make  # [unix]
       host:
         - xtensor >=0.24,<0.26
       run:
@@ -58,7 +58,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - cmake
-        - make  # [linux]
+        - make  # [unix]
       host:
         - python
         - scikit-build-core >=0.5,<0.11
