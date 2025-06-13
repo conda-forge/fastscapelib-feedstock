@@ -24,7 +24,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - cmake
-        - make  # [linux]
+        - make  # [unix]
       host:
         - xtensor >=0.24,<0.26
       run:
@@ -58,7 +58,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - cmake
-        - make  # [linux]
+        - make  # [unix]
       host:
         - python
         - scikit-build-core >=0.5,<0.11
