@@ -1,5 +1,5 @@
 {% set name = "fastscapelib" %}
-{% set version = "0.2.2" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}-split
@@ -8,10 +8,10 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/fastscape-lem/fastscapelib/archive/v{{ version }}.tar.gz
-  sha256: 21cac72a0586d1ceb1080eadbb60a7b7e81a4d6a7b56edbc696f92ff87fc6566
+  sha256: bfd3e8549a9bdd3ae3f0ba0ce4b1d8767d2bb8d163fd6be5d4beb35a9a36bcd0
 
 build:
-  number: 3
+  number: 0
 
 outputs:
   - name: fastscapelib
@@ -26,9 +26,11 @@ outputs:
         - cmake
         - make  # [unix]
       host:
-        - xtensor >=0.24,<0.26
+        - xtensor >=0.26,<0.27
+        - healpix_cxx >=3.81,<4  # [unix]
       run:
-        - xtensor >=0.24,<0.26
+        - xtensor >=0.26,<0.27
+        - healpix_cxx >=3.81,<4  # [unix]
     test:
       commands:
         - test -f ${PREFIX}/include/fastscapelib/grid/raster_grid.hpp  # [unix]
@@ -49,7 +51,7 @@ outputs:
         - export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"  # [osx]
         - python -m pip install . --no-deps -v --no-build-isolation
       activate_in_script: true
-      skip: true  # [python_impl == 'pypy']
+      skip: true  # [py<310 or python_impl == 'pypy']
     requirements:
       build:
         - python                                 # [build_platform != target_platform]
@@ -66,14 +68,17 @@ outputs:
         - numpy
         - pybind11
         - pybind11-abi
-        - xtensor-python >=0.27,<0.28
+        - xtensor-python >=0.28,<0.29
+        - healpix_cxx >=3.81,<4  # [unix]
       run:
         - python
+        - healpix_cxx >=3.81,<4  # [unix]
     test:
       source_files:
         - python/fastscapelib/tests
       requires:
         - pytest
+        - numba  # [py<313]
       imports:
         - fastscapelib
       commands:
