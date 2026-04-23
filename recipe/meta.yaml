@@ -11,7 +11,7 @@ source:
   sha256: bfd3e8549a9bdd3ae3f0ba0ce4b1d8767d2bb8d163fd6be5d4beb35a9a36bcd0
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - name: fastscapelib
